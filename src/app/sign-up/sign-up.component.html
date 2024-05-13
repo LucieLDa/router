@@ -1,1 +1,46 @@
-<p>sign-up works!</p>
+<form #myForm="ngForm" (ngSubmit)="myForm.valid && onSubmit()">
+    <fieldset>
+      <label for="firstName-user">Prénom </label>
+      <input id="firstName-user" name="firstName-user" type="text" [(ngModel)]="newUser.firstName" #firstName="ngModel" required minlength="3" maxlength="15"/>
+    </fieldset>
+  
+    <div *ngIf="firstName.errors && myForm.submitted">
+        <span *ngIf="firstName.errors?.['required']">Le prénom est requis</span> 
+        <span *ngIf="firstName.errors?.['minlength']">Le prénom doit comporter au moins 3 caractères</span>
+        <span *ngIf="firstName.errors?.['maxlength']">Le prénom ne doit pas dépasser 15 caractères.</span>
+    </div>
+  
+    <fieldset>
+      <label for="lastName-user">Nom de famille </label>
+      <input id="lastName-user" name="lastName-user" type="text" [(ngModel)]="newUser.lastName" #lastName="ngModel" required minlength="3" maxlength="15"/>
+    </fieldset>
+  
+    <div *ngIf="lastName.errors && myForm.submitted">
+        <span *ngIf="lastName.errors?.['required']">Le nom de famille est requis</span> 
+        <span *ngIf="lastName.errors?.['minlength']">Le nom de famille doit comporter au moins 3 caractères</span>
+        <span *ngIf="lastName.errors?.['maxlength']">Le nom de famille ne doit pas dépasser 15 caractères.</span>
+    </div>
+  
+    <fieldset>
+      <label for="email-user">E-mail </label>
+      <input id="email-user" name="email-user" type="email" [(ngModel)]="newUser.email" #email="ngModel" required email>
+    </fieldset>
+  
+    <div *ngIf="email.errors && myForm.submitted">
+        <span *ngIf="email.errors?.['required']">L'email est requis</span>
+        <span *ngIf="email.errors?.['email']">L'email est invalide</span>
+    </div>
+  
+    <fieldset>
+      <label for="password-user">Mot de passe </label>
+      <input id="password-user" name="password-user" type="password" [(ngModel)]="newUser.password" #password="ngModel" required minlength="6">
+    </fieldset>
+
+    <div *ngIf="password.errors && myForm.submitted">
+        <span *ngIf="password.errors?.['required']">Le mot de passe est requis</span>
+        <span *ngIf="password.errors?.['minlength']">Le mot de passe doit comporter au moins 6 caractères</span>
+    </div>
+  
+    <button type="reset">Restaurer</button>
+    <button type="submit">Valider</button>
+  </form>
